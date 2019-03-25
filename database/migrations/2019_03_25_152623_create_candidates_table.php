@@ -13,7 +13,7 @@ class CreateCandidatesTable extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('jobs')) {
+        if(!Schema::hasTable('candidates')) {
             Schema::create('candidates', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('name');

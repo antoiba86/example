@@ -13,7 +13,7 @@ class CreateCompaniesTable extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('jobs')) {
+        if(!Schema::hasTable('companies')) {
             Schema::create('companies', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('name')->unique();
