@@ -19,6 +19,8 @@ class CreateJobsTable extends Migration
                 $table->bigIncrements('candidate_id');
                 $table->bigIncrements('company_id');
                 $table->string('name');
+                $table->datetime('date_init');
+                $table->datetime('date_finish');
                 $table->timestamps();
             });
         }
