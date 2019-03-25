@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Job extends Model
 {
     protected $table = "jobs";
+    protected $guarded= [];
 
     /**
      * Get the candidate of a job
