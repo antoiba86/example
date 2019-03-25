@@ -41,8 +41,8 @@ class GetCandidantesAndJobs extends Command
         $this->call('add:candidates');
         $this->call('add:jobs');
         $headers = ["id", "name", "surname", "job name", "company name", "init date", "finish date"];
-        $candidates_with_jobs = Candidate::select("candidate.id as id_candidate", "name", "surname",
-                "job.name as job_name", "company_name", "date_init", "date_finish")->
+        $candidates_with_jobs = Candidate::select("candidates.id as id_candidate", "name", "surname",
+                "jobs.name as job_name", "company_name", "date_init", "date_finish")->
                 with('job')->orderBy('date_init', 'asc')->get()->toArray();
 
         $this->table($headers, $candidates_with_jobs);

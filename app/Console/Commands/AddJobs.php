@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Job;
 use Box\Spout\Common\Type;
 use Box\Spout\Reader\ReaderFactory;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class AddJobs extends Command
@@ -63,10 +64,10 @@ class AddJobs extends Command
                             $values['company_name'] = $value;
                             break;
                         case 4:
-                            $values['date_init'] = $value;
+                            $values['date_init'] = $this->createDateFromFormat($value);
                             break;
                         case 5:
-                            $values['date_finish'] = $value;
+                            $values['date_finish'] = $this->createDateFromFormat($value);
                             break;
                     }
                 }
@@ -78,5 +79,9 @@ class AddJobs extends Command
                 ], $values);
             }
         }
+    }
+
+    public function createDateFromFormat($date) {
+        return Carbon::createFromFormat("d.m.Y H:i", $date);
     }
 }
