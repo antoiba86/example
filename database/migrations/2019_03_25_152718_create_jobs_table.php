@@ -16,7 +16,9 @@ class CreateJobsTable extends Migration
         if(!Schema::hasTable('jobs')) {
             Schema::create('jobs', function (Blueprint $table) {
                 $table->bigIncrements('id');
-                $table->string('name')->unique();
+                $table->bigIncrements('candidate_id');
+                $table->bigIncrements('company_id');
+                $table->string('name');
                 $table->timestamps();
             });
         }
