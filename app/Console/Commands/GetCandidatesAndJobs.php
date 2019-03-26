@@ -6,7 +6,7 @@ use App\Models\Candidate;
 use App\Models\Job;
 use Illuminate\Console\Command;
 
-class GetCandidantesAndJobs extends Command
+class GetCandidatesAndJobs extends Command
 {
     /**
      * The name and signature of the console command.
