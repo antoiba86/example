@@ -45,7 +45,12 @@ class AddJobs extends Command
         $reader->setFieldDelimiter(',');
         $reader->setEndOfLineCharacter("\r\n");
         $file_path = env('FILE_PATH') . "jobs.csv";
-        $reader->open($file_path);
+        try {
+            $reader->open($file_path);
+        } catch (IOException $e) {
+            Log::error("Error " . $e . " File doesn't exist");
+            exit;
+        }
         foreach ($reader->getSheetIterator() as $sheet) {
             foreach ($sheet->getRowIterator() as $keyRow => $row) {
                 $values = [];
@@ -81,7 +86,8 @@ class AddJobs extends Command
         }
     }
 
-    public function createDateFromFormat($date) {
+    public function createDateFromFormat($date)
+    {
         return Carbon::createFromFormat("d.m.Y H:i", $date);
     }
 }

@@ -3,9 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Models\Candidate;
+use Box\Spout\Common\Exception\IOException;
 use Box\Spout\Common\Type;
 use Box\Spout\Reader\ReaderFactory;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class AddCandidates extends Command
 {
@@ -44,7 +46,12 @@ class AddCandidates extends Command
         $reader->setFieldDelimiter(',');
         $reader->setEndOfLineCharacter("\r\n");
         $file_path = env('FILE_PATH') . "candidates.csv";
-        $reader->open($file_path);
+        try {
+            $reader->open($file_path);
+        } catch (IOException $e) {
+            Log::error("Error " . $e . " File doesn't exist");
+            exit;
+        }
         foreach ($reader->getSheetIterator() as $sheet) {
             foreach ($sheet->getRowIterator() as $keyRow => $row) {
                 $values = [];
