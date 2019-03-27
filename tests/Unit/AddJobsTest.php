@@ -2,7 +2,9 @@
 
 namespace Tests\Unit;
 
+use Box\Spout\Common\Type;
 use Box\Spout\Reader\ReaderFactory;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -19,7 +21,7 @@ class AddJobsTest extends TestCase
 
     public function testJobFileExist()
     {
-        $this->assertTrue(Storage::disk('local_files')->exists("candidates.csv"));
+        $this->assertTrue(Storage::disk('local_files')->exists("jobs.csv"));
     }
 
     public function testReadFile()
@@ -27,7 +29,7 @@ class AddJobsTest extends TestCase
         $reader = ReaderFactory::create(Type::CSV);
         $reader->setFieldDelimiter(',');
         $reader->setEndOfLineCharacter("\r\n");
-        $file_path = env('FILE_PATH') . "candidates.csv";
+        $file_path = env('FILE_PATH') . "jobs.csv";
         $reader->open($file_path);
         $data = [];
         $fileValues = [
