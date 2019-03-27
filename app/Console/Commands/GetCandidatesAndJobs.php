@@ -45,7 +45,7 @@ class GetCandidatesAndJobs extends Command
         $candidates_with_jobs = Job::select("candidates.id as id_candidate", "candidates.name", "surname",
                 "jobs.name as job_name", "company_name", "date_init", "date_finish")
             ->join('candidates', 'jobs.candidate_id' , 'candidates.id')
-            ->orderBy('candidates.id', 'asc')->orderBy('date_init', 'asc')->get()->toArray();
+            ->orderBy('candidates.id', 'asc')->orderBy('date_init', 'desc')->get()->toArray();
 
         $this->table($headers, $candidates_with_jobs);
     }
